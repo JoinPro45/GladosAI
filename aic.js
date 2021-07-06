@@ -1,3 +1,5 @@
+const { networkInterfaces } = require("node:os");
+
 function tagInText(text, tags){
     var p = true;
     for (var tag in tags) {
@@ -39,10 +41,14 @@ function inText(text, tags) {
     }
 }
 
-function LicBas(bop) {
-    if (tagInText(bop, [["привет", "здравствуй"]])){
+function LicBas(bop, meName) {
+    if (tagInText(bop, [meName])) {
+        return "А?";
+    }
+    if (tagInText(bop, [["привет", "здравствуй", "дорова", "хай"]])){
         return "Привет! Как тебя зовут?";
     }
+    if (tagInText(bop, [["Пока", "До свидания"]])) return "Уходи. Было весело!";
     if (tagInText(bop, [["Я", "Меня зовут"]])){
         var name = inText(bop, ["зовут","Я"]);
         return `Очень приятно! ${name}`;
@@ -50,15 +56,17 @@ function LicBas(bop) {
     if (tagInText(bop, ["Как",["дела", "настроения", "жизнь", ]])){
         return "Нормально!";
     }
+    /*
     if (tagInText(bop, ["Ты",["играл", "играеш", "проходил", "проходиш"]])){
         var game = inText(bop, ["в", "проходил", "проходиш"])
         return `Да, мне наравица игра ${game}`;
     }
-    if (tagInText(bop, ["Ты",["смотрела", "смотрел", "ходила в кинотеатыр", "ходила на"]])){
-        var game = inText(bop, ["кино", "сериал", "тв-шоу", "на", "смотрел"]) 
-        return `Да, мне наравица ${game}`
+    */
+    if (tagInText(bop, ["Ты",["смотрела", "смотрел", "ходила в кинотеатыр", "ходила на", "ходил на", "ходил в кинотеатыр", "смотреть"]])){
+        var game = inText(bop, ["кино", "сериал", "тв-шоу", "на", "смотрела", "смотрел", "смотреть"]);
+        return `Да, мне наравица ${game}`;
     }
     if (tagInText(bop, [["Как", "Какое", "Кто"], ["зовут", "звать", "имя", "тебя", "ты"]])) {
-         return "Меня зовут ГлАДОС!";
+         return `Меня зовут ${meName}!`;
     }
 }

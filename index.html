@@ -13,11 +13,21 @@
             text-align: center;
             margin-top: 0;
         }
+        #click {
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgb(39, 39, 39);
+        }
+        img {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    <img src="glados.png" width="300" height="400" onclick="recognizer.start()"/>
+    <img src="glados.png" width="300" height="400"/>
     <br>
+    <a id="click">^Кликни на меня чтобы начать разговор^</a>
 
     <script src="aic.js"></script><script src="jquery.js"></script><script src="rot.js"></script>
     <script>
@@ -26,14 +36,17 @@
         var synth = speechSynthesis;
 
         recognizer.interimResults = true;
-
         recognizer.lang = 'ru-Ru';
 
         recognizer.onresult = function (event) {
             var result = event.results[event.resultIndex];
+
+            //$("#click").show();
+            $("#click").text(result[0].transcript);
+
             if (result.isFinal) {
                 //alert('Вы сказали: ' + result[0].transcript);
-                var a = LicBas(result[0].transcript);
+                var a = LicBas(result[0].transcript, "ГлаДОС");
                 if(a) { 
                     synth.speak(new SpeechSynthesisUtterance(a));
                 }
@@ -43,6 +56,11 @@
                 setTimeout(() => $("img").rotate(0), 500);
             }
         };
+
+        $("img").click(() => {
+            //$("#click").hide();
+            recognizer.start();
+        });
     </script>
 </body>
 </html>
