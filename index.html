@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>РАЗГОВАРИВАЙ С ГЛАДОС</title>
+    <style>
+        body {
+            background-color: black;
+            text-align: center;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://static.wikia.nocookie.net/zlodei/images/8/88/%D0%93%D0%9B%D0%B0%D0%94%D0%9E%D0%A1.png/revision/latest?cb=20180413160319&path-prefix=ru" width="300" height="400" onclick="recognizer.start()"/>
+    <br>
+
+    <script src="aic.js"></script><script src="jquery.js"></script><script src="rot.js"></script>
+    <script>
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        var recognizer = new SpeechRecognition();
+        var synth = speechSynthesis;
+
+        recognizer.interimResults = true;
+
+        recognizer.lang = 'ru-Ru';
+
+        recognizer.onresult = function (event) {
+            var result = event.results[event.resultIndex];
+            if (result.isFinal) {
+                //alert('Вы сказали: ' + result[0].transcript);
+                var a = LicBas(result[0].transcript);
+                if(a) { 
+                    synth.speak(new SpeechSynthesisUtterance(a));
+                }
+            }
+            else {
+                $("img").rotate(180);
+                setTimeout(() => $("img").rotate(0), 500);
+            }
+        };
+    </script>
+</body>
+</html>
