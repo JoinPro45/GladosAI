@@ -1,4 +1,7 @@
-const { networkInterfaces } = require("node:os");
+function random(words) {
+   var random = Math.floor(Math.random() * words.length);
+   return words[random]; 
+}
 
 function tagInText(text, tags){
     var p = true;
@@ -42,31 +45,33 @@ function inText(text, tags) {
 }
 
 function LicBas(bop, meName) {
-    if (tagInText(bop, [meName])) {
-        return "А?";
-    }
     if (tagInText(bop, [["привет", "здравствуй", "дорова", "хай"]])){
         return "Привет! Как тебя зовут?";
     }
     if (tagInText(bop, [["Пока", "До свидания"]])) return "Уходи. Было весело!";
-    if (tagInText(bop, [["Я", "Меня зовут"]])){
+    if (tagInText(bop, [["Я", "Меня"]])){
         var name = inText(bop, ["зовут","Я"]);
         return `Очень приятно! ${name}`;
     }
-    if (tagInText(bop, ["Как",["дела", "настроения", "жизнь", ]])){
+    if (tagInText(bop, ["Как",["дела", "настроения", "жизнь"]])){
         return "Нормально!";
     }
-    /*
-    if (tagInText(bop, ["Ты",["играл", "играеш", "проходил", "проходиш"]])){
-        var game = inText(bop, ["в", "проходил", "проходиш"])
-        return `Да, мне наравица игра ${game}`;
+    if (tagInText(bop, ["Ты",["играл", "играла", "играешь", "проходил", "проходила", "проходиш"]])){
+        var game = inText(bop, ["в", "проходил", "проходила", "проходиш"])
+        return random([`Да, мне наравица игра ${game}`, `Мне не наравица игра ${game}`, `Я люблю игру ${game}`]);
     }
-    */
-    if (tagInText(bop, ["Ты",["смотрела", "смотрел", "ходила в кинотеатыр", "ходила на", "ходил на", "ходил в кинотеатыр", "смотреть"]])){
+    if (tagInText(bop, ["Ты",["смотрела", "смотрел", "ходила", "ходил", "смотреть"]])){
         var game = inText(bop, ["кино", "сериал", "тв-шоу", "на", "смотрела", "смотрел", "смотреть"]);
-        return `Да, мне наравица ${game}`;
+        return random([`Да, мне наравица ${game}`, `Мне не наравица ${game}`, `Я люблю ${game}`]);
+    }
+    if (tagInText(bop, [["Ты", "Тебе"] ,["любишь", "нравица", "нравится"]])){
+        var game = inText(bop, ["любишь", "нравица", "нравится"])
+        return random([`Да, мне наравица`, `Мне не наравица`, `Я люблю`]);
     }
     if (tagInText(bop, [["Как", "Какое", "Кто"], ["зовут", "звать", "имя", "тебя", "ты"]])) {
          return `Меня зовут ${meName}!`;
+    }
+    if (tagInText(bop, [meName])) {
+        return "А?";
     }
 }

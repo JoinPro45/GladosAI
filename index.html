@@ -47,6 +47,13 @@
             if (result.isFinal) {
                 //alert('Вы сказали: ' + result[0].transcript);
                 var a = LicBas(result[0].transcript, "ГлаДОС");
+                if (tagInText(result[0].transcript, ["Тортик", ["лож", "ложь"]])) {
+                    a = "Нееет!";
+                }
+                if (tagInText(result[0].transcript, [["Спой", "Включи"], ["песню", "музыку"]])) {
+                    a = "feel fantastic and I'm Still alive While you're dying I'll be Still alive And when you're dead I will be Still alive Still alive";
+                }
+
                 if(a) { 
                     synth.speak(new SpeechSynthesisUtterance(a));
                 }
