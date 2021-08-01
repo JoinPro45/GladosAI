@@ -1,9 +1,11 @@
+var downBop = [];
+
 function random(words) {
    var random = Math.floor(Math.random() * words.length);
    return words[random]; 
 }
 
-function tagInText(text, tags){
+function tagInText(text, tags, pas){
     var p = true;
     for (var tag in tags) {
         var i = false;
@@ -19,6 +21,12 @@ function tagInText(text, tags){
         }
         p = p && i;
     }
+    if(!(pas == undefined)) {
+        //console.log(downBop.join());
+        if(downBop.join() == pas.join()) p = p && 1;
+        else p = p && 0;
+    }
+    if(p) downBop = tags;
     return p
 }
 
@@ -46,15 +54,18 @@ function inText(text, tags) {
 
 function LicBas(bop, meName) {
     if (tagInText(bop, [["привет", "здравствуй", "дорова", "хай"]])){
-        return "Привет! Как тебя зовут?";
+        return "Привет! Как дела?";
     }
-    if (tagInText(bop, [["Пока", "До свидания"]])) return "Уходи. Было весело!";
+    if (tagInText(bop, [["Пока", "Досвидания"]])) return "Уходи. Было весело!";
     if (tagInText(bop, [["Я", "Меня"]])){
         var name = inText(bop, ["зовут","Я"]);
         return `Очень приятно! ${name}`;
     }
     if (tagInText(bop, ["Как",["дела", "настроения", "жизнь"]])){
         return "Нормально!";
+    }
+    if (tagInText(bop, [["Нормально", "Плохо", "Хорошо"]], [["привет", "здравствуй", "дорова", "хай"]])) {
+        return "У меня тоже";
     }
     if (tagInText(bop, ["Ты",["играл", "играла", "играешь", "проходил", "проходила", "проходиш"]])){
         var game = inText(bop, ["в", "проходил", "проходила", "проходиш"])
