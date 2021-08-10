@@ -38,6 +38,9 @@
         recognizer.interimResults = true;
         recognizer.lang = 'ru-Ru';
 
+        var name = "ГлаДОС";
+        var howBop = 0;
+
         recognizer.onresult = function (event) {
             var result = event.results[event.resultIndex];
 
@@ -50,18 +53,33 @@
                 if (tagInText(result[0].transcript, [["привет", "здравствуй", "дорова", "хай"]])) {
                     a = "Давно не виделись! Как дела?";
                 }
-                else if (tagInText(result[0].transcript, ["Тортик", ["лож", "ложь"]])) {
+                else if (tagInText(result[0].transcript, [["Тортик", "Ты"], ["лож", "ложь", "абобус", "абуз"]])) {
                     a = "Нееет!";
                 }
                 else if (tagInText(result[0].transcript, [["Спой", "Включи"], ["песню", "музыку"]])) {
                     a = "feel fantastic and I'm Still alive While you're dying I'll be Still alive And when you're dead I will be Still alive Still alive";
                 }
+                else if (tagInText(result[0].transcript, [["Включи", "Открой"]])) {
+                    var app = inText(result[0].transcript, ["Включи", "Открой"]);
+                    if(app == "Яндекс") open("https://www.ya.ru");
+                    if(app == "яндекс") open("https://www.ya.ru");
+                    if(app == "Steam") open("steam://");
+                    if(app == "Стим") open("steam://");
+                    if(app == "Minecraft") open("minecraft://");
+                    if(app == "Майнкрафт") open("minecraft://");
+                }
                 else {
-                    a = LicBas(result[0].transcript, "ГлаДОС");
+                    a = LicBas(result[0].transcript, name);
                 }
 
                 if(a) { 
                     synth.speak(new SpeechSynthesisUtterance(a));
+                    howBop++;
+                    if(howBop == 12) {
+                        document.querySelector("img").src = "kareika.png";
+                        document.querySelector("img").width = "700";
+                        name = "Корейка Даша";
+                    }
                 }
             }
             else {
