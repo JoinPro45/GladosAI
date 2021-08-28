@@ -13,5 +13,14 @@
           "type": "image/png",
           "sizes": "512x512"
         }
-      ]
+    ],
+      "shortcuts": [
+        {
+          "name": "Корейка Даша",
+          "short_name": "Корейка Даша",
+          "description": "Голосовой помощник",
+          "url": "?ai=1",
+          "icons": [{ "src": "icon1.png", "sizes": "192x192" }]
+        }
+    ]
   }
