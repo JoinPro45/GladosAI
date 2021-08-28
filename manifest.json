@@ -19,7 +19,7 @@
           "name": "Корейка Даша",
           "short_name": "Корейка Даша",
           "description": "Голосовой помощник",
-          "url": "?ai=1",
+          "url": "/?ai=1",
           "icons": [{ "src": "icon1.png", "sizes": "192x192" }]
         }
     ]
