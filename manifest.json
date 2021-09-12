@@ -12,11 +12,6 @@
           "src": "icon.png",
           "type": "image/png",
           "sizes": "396x396"
-        },
-        {
-          "src": "icon.png",
-          "type": "image/png",
-          "sizes": "512x512"
         }
     ],
       "shortcuts": [
@@ -26,10 +21,6 @@
           "description": "Голосовой помощник",
           "url": "/GladosAI/?ai=1",
           "icons": [
-            { 
-              "src": "icon1.png", 
-              "sizes": "192x192" 
-            },
             { 
               "src": "icon1.png", 
               "sizes": "396x396" 
