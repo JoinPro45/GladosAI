@@ -34,6 +34,9 @@
     <script src="rot.js"></script>
     <script src="app.js"></script>
     <script>
+        var name = "ГлаДОС";
+        var howBop = 0;
+
         if (document.URL.indexOf("ai") != -1) {
             howBop = 13;
             document.querySelector("img").src = "kareika.png";
@@ -47,9 +50,6 @@
 
         recognizer.interimResults = true;
         recognizer.lang = 'ru-Ru';
-
-        var name = "ГлаДОС";
-        var howBop = 0;
 
         recognizer.onresult = function (event) {
             var result = event.results[event.resultIndex];
