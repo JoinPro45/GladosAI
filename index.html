@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-    <img src="glados.png" width="300" height="400"/>
+    <img src="glados.png" width="340" height="400"/>
     <br>
     <a id="click">^Кликни на меня чтобы начать разговор^</a>
 
@@ -34,6 +34,13 @@
     <script src="rot.js"></script>
     <script src="app.js"></script>
     <script>
+        if (document.URL.indexOf("ai") != -1) {
+            howBop = 13;
+            document.querySelector("img").src = "kareika.png";
+            document.querySelector("img").width = "400";
+            name = "Корейка Даша";
+        }
+
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var recognizer = new SpeechRecognition();
         var synth = speechSynthesis;
@@ -80,7 +87,7 @@
                     howBop++;
                     if(howBop == 12) {
                         document.querySelector("img").src = "kareika.png";
-                        document.querySelector("img").width = "700";
+                        document.querySelector("img").width = "400";
                         name = "Корейка Даша";
                     }
                 }
