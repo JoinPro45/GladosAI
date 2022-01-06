@@ -78,6 +78,10 @@
                     if(app == "Minecraft") open("minecraft://");
                     if(app == "Майнкрафт") open("minecraft://");
                 }
+                else if (tagInText(result[0].transcript, [["Что", "Иши", "Найди"], ["мне", "такое"]])) {
+                    var text = inText(result[0].transcript, ["мне", "такое"]);
+                    open(`https://yandex.ru/search/?text=${text}`);
+                }
                 else {
                     a = LicBas(result[0].transcript, name);
                 }
