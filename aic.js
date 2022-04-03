@@ -52,6 +52,28 @@ function inText(text, tags) {
     }
 }
 
+function inTextAll(text, tags) {
+    if( typeof tags == "string" ) tags = [tags];
+    
+    var textE = text.toLocaleLowerCase()
+            .replace(",", "")
+            .replace(".", "")
+            .replace("?", "")
+            .replace("!", "")
+            .split(" ");
+    text = text.replace(",", "")
+            .replace(".", "")
+            .replace("?", "")
+            .replace("!", "")
+            .split(" ");
+    tags = tags.join().toLocaleLowerCase().split(",");
+    
+    for(var tag in tags) {
+        var index = textE.indexOf(tags[tag]);
+        if(index > -1) return text.slice(textE.indexOf(textE[index + 1]), text.length).join(" ");
+    }
+}
+
 function LicBas(bop, meName) {
     if (tagInText(bop, [["привет", "здравствуй", "дорова", "хай"]])){
         return "Привет! Как дела?";

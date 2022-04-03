@@ -13,19 +13,5 @@
           "type": "image/png",
           "sizes": "396x396"
         }
-    ],
-      "shortcuts": [
-        {
-          "name": "Корейка Даша",
-          "short_name": "Корейка Даша",
-          "description": "Голосовой помощник",
-          "url": "/GladosAI/?ai",
-          "icons": [
-            { 
-              "src": "icon1.png", 
-              "sizes": "396x396" 
-            }
-          ]
-        }
     ]
   }

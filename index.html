@@ -9,15 +9,15 @@
     <title>Голосовой помощник GLADOS</title>
     <style>
         body {
-            background-color: black;
+            background-color: #111;
             text-align: center;
             margin-top: 0;
         }
         #click {
             color: white;
             padding: 10px;
-            border-radius: 5px;
-            background-color: rgb(39, 39, 39);
+            border-radius: 0 15px 15px 15px;
+            background-color: #333;
         }
         img {
             margin-bottom: 20px;
@@ -27,7 +27,7 @@
 <body>
     <img src="glados.png" width="340" height="400"/>
     <br>
-    <a id="click">^Кликни на меня чтобы начать разговор^</a>
+    <p><a id="click">^Кликни на меня чтобы начать разговор^</a></p>
 
     <script src="aic.js"></script>
     <script src="jquery.js"></script>
@@ -35,10 +35,8 @@
     <script src="app.js"></script>
     <script>
         var name = "ГлаДОС";
-        var howBop = 0;
 
         if (document.URL.indexOf("ai") != -1) {
-            howBop = 13;
             document.querySelector("img").src = "kareika.png";
             document.querySelector("img").width = "400";
             name = "Корейка Даша";
@@ -59,41 +57,60 @@
 
             if (result.isFinal) {
                 //alert('Вы сказали: ' + result[0].transcript);
-                var a = "";
+
                 if (tagInText(result[0].transcript, [["привет", "здравствуй", "дорова", "хай"]])) {
-                    a = "Давно не виделись! Как дела?";
+                    audioPlay("https://i1.theportalwiki.net/img/b/b8/GLaDOS_chellgladoswakeup04_ru.wav");
+                }
+                else if (tagInText(result[0].transcript, ["Как",["дела", "настроения", "жизнь"]])) {
+                    audioPlay("https://i1.theportalwiki.net/img/0/01/GLaDOS_taunt_laugh03_ru.wav");
+                }
+                else if (tagInText(result[0].transcript, [["пока", "До свидания"]])) {
+                    audioPlay(
+                        random([
+                            "https://i1.theportalwiki.net/img/d/df/GLaDOS_epilogue25_ru.wav", 
+                            "https://i1.theportalwiki.net/img/2/22/GLaDOS_potatos_cavejohnsonmeeting12_ru.wav"
+                        ])
+                    );
+                }
+                if (tagInText(result[0].transcript, [["Нормально", "Плохо", "Хорошо"]], [["привет", "здравствуй", "дорова", "хай"]])) {
+                    audioPlay("https://i1.theportalwiki.net/img/5/53/GLaDOS_botcoop_intro09_ru.wav");
                 }
                 else if (tagInText(result[0].transcript, [["Тортик", "Ты"], ["лож", "ложь", "абобус", "абуз"]])) {
-                    a = "Нееет!";
+                    audioPlay("https://i1.theportalwiki.net/img/7/7a/GLaDOS_gladosbattle_xfer08_ru.wav");
                 }
-                else if (tagInText(result[0].transcript, [["Спой", "Включи"], ["песню", "музыку"]])) {
-                    a = "feel fantastic and I'm Still alive While you're dying I'll be Still alive And when you're dead I will be Still alive Still alive";
-                }
-                else if (tagInText(result[0].transcript, [["Включи", "Открой"]])) {
-                    var app = inText(result[0].transcript, ["Включи", "Открой"]);
-                    if(app == "Яндекс") open("https://www.ya.ru");
-                    if(app == "яндекс") open("https://www.ya.ru");
-                    if(app == "Steam") open("steam://");
-                    if(app == "Стим") open("steam://");
-                    if(app == "Minecraft") open("minecraft://");
-                    if(app == "Майнкрафт") open("minecraft://");
-                }
-                else if (tagInText(result[0].transcript, [["Что", "Иши", "Найди"], ["мне", "такое"]])) {
-                    var text = inText(result[0].transcript, ["мне", "такое"]);
-                    open(`https://yandex.ru/search/?text=${text}`);
-                }
-                else {
-                    a = LicBas(result[0].transcript, name);
-                }
+                else if (tagInText(result[0].transcript, [["Включи", "Открой", "Запусти"]])) {
+                    audioPlay(
+                        random([
+                            "https://i1.theportalwiki.net/img/e/e9/GLaDOS_potatos_cavejohnsonmeeting06_ru.wav", 
+                            "https://i1.theportalwiki.net/img/f/f3/GLaDOS_potatos_cavejohnsonmeeting05_ru.wav", 
+                            "https://i1.theportalwiki.net/img/d/dc/GLaDOS_potatos_cavejohnsonmeeting08_ru.wav"
+                        ])
+                    );
 
-                if(a) { 
-                    synth.speak(new SpeechSynthesisUtterance(a));
-                    howBop++;
-                    if(howBop == 12) {
-                        document.querySelector("img").src = "kareika.png";
-                        document.querySelector("img").width = "400";
-                        name = "Корейка Даша";
-                    }
+                    var app = inText(result[0].transcript, ["Включи", "Открой"]).toLocaleLowerCase();
+                    if(app == "яндекс") open("https://www.ya.ru");
+                    if(app == "youtube") open("https://www.youtube.com/");
+                    if(app == "ютуб") open("https://www.youtube.com/");
+                    if(app == "google") open("https://www.google.com/");
+                    if(app == "гугл") open("https://www.google.com/");
+                    if(app == "spotify") open("spotify://");
+                    if(app == "спотифай") open("spotify://");
+                    if(app == "steam") open("steam://");
+                    if(app == "cтим") open("steam://");
+                    if(app == "minecraft") open("minecraft://");
+                    if(app == "майнкрафт") open("minecraft://");
+                }
+                else if (tagInText(result[0].transcript, [["Что", "Иши", "Найди"], ["мне", "такое"]]) || tagInText(result[0].transcript, [["Найди", "Поищи"]])) {
+                    audioPlay(
+                        random([
+                            "https://i1.theportalwiki.net/img/e/e9/GLaDOS_potatos_cavejohnsonmeeting06_ru.wav", 
+                            "https://i1.theportalwiki.net/img/f/f3/GLaDOS_potatos_cavejohnsonmeeting05_ru.wav", 
+                            "https://i1.theportalwiki.net/img/d/dc/GLaDOS_potatos_cavejohnsonmeeting08_ru.wav"
+                        ])
+                    );
+
+                    var text = inTextAll(result[0].transcript, ["мне", "такое", "найди", "поищи"]);
+                    open(`https://yandex.ru/search/?text=${text}`);
                 }
             }
             else {
@@ -106,6 +123,11 @@
             //$("#click").hide();
             recognizer.start();
         });
+
+        function audioPlay(url){
+            var audio = new Audio(url);
+            audio.play();
+        }
     </script>
 </body>
 </html>
