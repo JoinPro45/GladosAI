@@ -72,13 +72,33 @@
                         ])
                     );
                 }
-                if (tagInText(result[0].transcript, [["Нормально", "Плохо", "Хорошо"]], [["привет", "здравствуй", "дорова", "хай"]])) {
+                else if (tagInText(result[0].transcript, [["Нормально", "Плохо", "Хорошо"]], [["привет", "здравствуй", "дорова", "хай"]])) {
                     audioPlay("https://i1.theportalwiki.net/img/5/53/GLaDOS_botcoop_intro09_ru.wav");
                 }
                 else if (tagInText(result[0].transcript, [["Тортик", "Ты"], ["лож", "ложь", "абобус", "абуз"]])) {
                     audioPlay("https://i1.theportalwiki.net/img/7/7a/GLaDOS_gladosbattle_xfer08_ru.wav");
                 }
+                else if (tagInText(result[0].transcript, [["Как", "Какое", "Кто"], ["зовут", "звать", "имя", "тебя", "ты"]])) {
+                    audioPlay("https://i1.theportalwiki.net/img/3/32/GLaDOS_potatos_familiarportrait02_ru.wav");
+                }
                 else if (tagInText(result[0].transcript, [["Включи", "Открой", "Запусти"]])) {
+                    var app = inText(result[0].transcript, ["Включи", "Открой"]).toLocaleLowerCase();
+                    if(app == "яндекс") open("https://www.ya.ru");
+                    else if(app == "youtube") open("https://www.youtube.com/");
+                    else if(app == "ютуб") open("https://www.youtube.com/");
+                    else if(app == "google") open("https://www.google.com/");
+                    else if(app == "гугл") open("https://www.google.com/");
+                    else if(app == "spotify") open("spotify://");
+                    else if(app == "спотифай") open("spotify://");
+                    else if(app == "steam") open("steam://");
+                    else if(app == "cтим") open("steam://");
+                    else if(app == "minecraft") open("minecraft://");
+                    else if(app == "майнкрафт") open("minecraft://");
+                    else {
+                        audioPlay("https://i1.theportalwiki.net/img/b/b0/GLaDOS_potatos_sp_a4_intro_paradox07_ru.wav");
+                        return;
+                    }
+
                     audioPlay(
                         random([
                             "https://i1.theportalwiki.net/img/e/e9/GLaDOS_potatos_cavejohnsonmeeting06_ru.wav", 
@@ -86,19 +106,6 @@
                             "https://i1.theportalwiki.net/img/d/dc/GLaDOS_potatos_cavejohnsonmeeting08_ru.wav"
                         ])
                     );
-
-                    var app = inText(result[0].transcript, ["Включи", "Открой"]).toLocaleLowerCase();
-                    if(app == "яндекс") open("https://www.ya.ru");
-                    if(app == "youtube") open("https://www.youtube.com/");
-                    if(app == "ютуб") open("https://www.youtube.com/");
-                    if(app == "google") open("https://www.google.com/");
-                    if(app == "гугл") open("https://www.google.com/");
-                    if(app == "spotify") open("spotify://");
-                    if(app == "спотифай") open("spotify://");
-                    if(app == "steam") open("steam://");
-                    if(app == "cтим") open("steam://");
-                    if(app == "minecraft") open("minecraft://");
-                    if(app == "майнкрафт") open("minecraft://");
                 }
                 else if (tagInText(result[0].transcript, [["Что", "Иши", "Найди"], ["мне", "такое"]]) || tagInText(result[0].transcript, [["Найди", "Поищи"]])) {
                     audioPlay(
